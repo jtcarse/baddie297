@@ -35,7 +35,9 @@ def get_monster_data(monster_id):
 	monster_data['elements'] = [ a.text for a in data[1].find_all('a') ]
 
 	# store skill id
-	monster_data['skill'] = int(soup.find('td', { 'class': 'value-end' }).find('a')['href'][12:])
+	skill_soup = soup.find('td', { 'class': 'value-end' }).find('a')
+	if skill_soup:
+		monster_data['skill'] = int(skill_soup['href'][12:])
 
 	# get list of awoken skills
 	awakening_soup = soup.find_all('td', { 'class': 'awoken1' })
