@@ -10,9 +10,7 @@ db = client.db
 @app.route('/', methods=['GET'])
 @cross_origin()
 def root():
-	db.hits.insert_one({ 'time': datetime.utcnow() })
-	message = 'This page has been visited {} times.'.format(db.hits.count())
-	return jsonify({ 'message': message })
+	return jsonify({ 'message': 'Welcome to Baddie +297!' })
 
 if __name__ == '__main__':
 	# only used locally
