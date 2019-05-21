@@ -10,7 +10,10 @@ db = client.db
 @app.route('/', methods=['GET'])
 @cross_origin()
 def root():
-	return jsonify({ 'message': 'Welcome to Baddie +297!' })
+
+	return jsonify(
+		{ 'message': 'There are {} monsters in the database.'.format(db.monsters.count()) }
+	)
 
 if __name__ == '__main__':
 	# only used locally
