@@ -1,4 +1,5 @@
 # ROOT
+*.swp
 
 # CLIENT
 client/build

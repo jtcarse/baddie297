@@ -14,7 +14,7 @@ def get_monster_data(monster_id):
 	monster_data = {}
 
 	# store id
-	monster_data['id'] = monster_id
+	monster_data['_id'] = monster_id
 
 	# parse html
 	soup = BeautifulSoup(r.content, 'html.parser')
