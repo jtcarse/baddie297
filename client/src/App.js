@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './App.css';
 
@@ -23,8 +24,8 @@ class App extends Component {
 						href="https://reactjs.org"
 						target="_blank"
 						rel="noopener noreferrer"
-					>
-					Learn React
+					>	
+						<Button>Learn React</Button>
 					</a>
 				</header>
 			</div>
