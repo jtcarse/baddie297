@@ -21,15 +21,15 @@ def monsters():
 	args = { key: value.split(',') for key, value in request.args.items() }
 
 	# valid parameters: _id, name, skill, awakenings, super_awakenings
-	query = {}
+	query_args = {}
 
-	# insert singleton data into query
-	if '_id' in args.keys():
-		query['_id'] = args['_id'][0]
-	if 'name' in args.keys():
-		query['name'] = args['name'][0]
-	if 'skill' in args.keys():
-		query['skill'] = args['skill'][0]
+	# insert types into query
+	if 'types' in args.keys():
+		query_args['types'] = { '$all': [ t for t in args['types'] ] }
+	
+	# insert elements into query
+	if 'elements' in args.keys():
+		query_args['elements'] = { '$all': [ e for e in args['elements'] ] }
 
 	# insert awakenings into query
 	if 'awakenings' in args.keys():
@@ -37,7 +37,7 @@ def monsters():
 		for a in args['awakenings']:
 			a_dict[a] = a_dict.get(a, 0) + 1
 		for key, value in a_dict.items():
-			query['awakenings.{}'.format(key)] = { '$gte': value }
+			query_args['awakenings.{}'.format(key)] = { '$gte': value }
 	
 	# insert super awakenings into query
 	if 'super_awakenings' in args.keys():
@@ -45,11 +45,14 @@ def monsters():
 		for sa in args['awakenings']:
 			sa_dict[sa] = sa_dict.get(sa, 0) + 1
 		for key, value in sa_dict.items():
-			query['super_awakenings.{}'.format(key)] = { '$gte': value }
+			query_args['super_awakenings.{}'.format(key)] = { '$gte': value }
 	
-	aggregated_query = { '$and': [ { key: value for key, value in query.items() } ] }
-	projection = { 'materials': 0, 'evolves_from': 0 }
-	result = db.monsters.find(aggregated_query, limit=20)
+	if query_args:
+		query = { '$and': [ { key: value for key, value in query_args.items() } ] }
+	else:
+		query = {}
+
+	result = db.monsters.find(query, limit=20)
 	monsters = [ monster for monster in result ]
 
 	return jsonify(monsters)
