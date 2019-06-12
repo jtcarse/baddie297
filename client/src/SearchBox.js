@@ -26,11 +26,15 @@ class AwakeningButton extends Component {
 }
 
 class AwakeningList extends Component {
+	onItemClick(i) {
+		this.props.onItemClick(i);
+	}
+
 	render() {
 		return (
 			<List horizontal>
-				{ this.props.awakenings.map(id =>
-					<List.Item>
+				{ this.props.awakenings.map((id, index) =>
+					<List.Item onClick={this.onItemClick.bind(this, index)}>
 						<Image src={icons[id]} />
 					</List.Item>
 				)}
@@ -51,7 +55,14 @@ class SearchBox extends Component {
 		this.setState({
 			awakenings: this.state.awakenings.concat([a])
 		});
-		console.log(this.state.awakenings);
+	}
+
+	removeAwakening(i) {
+		let a = this.state.awakenings;
+		a.splice(i, 1);
+		this.setState({
+			awakenings: a 
+		});
 	}
 
 	componentDidMount() {/*
@@ -70,7 +81,11 @@ class SearchBox extends Component {
 						onClick={this.addAwakening.bind(this)}
 					/>
 				)}
-				<AwakeningList awakenings={this.state.awakenings} />
+				<br />
+				<AwakeningList
+					awakenings={this.state.awakenings}
+					onItemClick={this.removeAwakening.bind(this)}
+				/>
 			</div>
 		);
 	}
