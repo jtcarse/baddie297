@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './App.css';
+import SearchBox from './SearchBox.js'
 
 class App extends Component {
 	state = { message: null };
@@ -28,6 +29,7 @@ class App extends Component {
 						<Button>Learn React</Button>
 					</a>
 				</header>
+				<SearchBox />
 			</div>
 		);
 	}
