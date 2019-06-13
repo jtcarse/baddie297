@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './App.css';
-import SearchBox from './SearchBox.js'
+import SearchBox from './SearchBox.js';
+import axios from 'axios';
 
 class App extends Component {
 	state = { message: null };
 
 	componentDidMount() {
-		fetch('http://localhost:8080')
-			.then(response => response.json())
-			.then(data => this.setState({ message: data.message }));
+		axios.get('http://localhost:8080')
+			.then(result => this.setState({ message: result.data.message }));
 	}
 
 	render() {
