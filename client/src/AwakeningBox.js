@@ -6,29 +6,14 @@ import AwakeningList from './AwakeningList.js';
 //import './App.css';
 
 class AwakeningBox extends Component {
-	state = {
-		awakenings: []
-	};
 
 	addAwakening(a) {
-		this.setState({
-			awakenings: this.state.awakenings.concat([a])
-		});
+		this.props.addAwakening(a);
 	}
 
 	removeAwakening(i) {
-		let a = this.state.awakenings;
-		a.splice(i, 1);
-		this.setState({
-			awakenings: a
-		});
+		this.props.removeAwakening(i);
 	}
-
-	componentDidMount() {/*
-		fetch('http://localhost:8080')
-			.then(response => response.json())
-			.then(data => this.setState({ message: data.message }));
-	*/}
 
 	render() {
 		return (
@@ -42,7 +27,7 @@ class AwakeningBox extends Component {
 				)}
 				<br />
 				<AwakeningList
-					awakenings={this.state.awakenings}
+					awakenings={this.props.awakenings}
 					onItemClick={this.removeAwakening.bind(this)}
 				/>
 			</div>
