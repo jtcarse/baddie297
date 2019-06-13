@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, List } from 'semantic-ui-react';
-import icons from './icons.js';
+import icons from './awakeningIcons.js';
 //import './App.css';
 
 class AwakeningList extends Component {

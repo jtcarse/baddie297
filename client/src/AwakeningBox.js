@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {} from 'semantic-ui-react';
-import icons from './icons.js';
+import icons from './awakeningIcons.js';
 import AwakeningButton from './AwakeningButton.js';
 import AwakeningList from './AwakeningList.js';
 //import './App.css';
