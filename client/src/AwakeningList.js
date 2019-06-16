@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { Image, List } from 'semantic-ui-react';
 import icons from './awakeningIcons.js';
-//import './App.css';
+import placeholder from './icons/awakenings/0.png';
+import './AwakeningList.css';
 
 class AwakeningList extends Component {
 	onItemClick(i) {
@@ -10,13 +11,21 @@ class AwakeningList extends Component {
 
 	render() {
 		return (
-			<List horizontal>
-				{ this.props.awakenings.map((id, index) =>
-					<List.Item onClick={this.onItemClick.bind(this, index)}>
-						<Image src={icons[id]} />
-					</List.Item>
-				)}
-			</List>
+			<div className="AwakeningList">
+				<List horizontal>
+					{
+						this.props.awakenings.length ?
+							this.props.awakenings.map((id, index) =>
+							<List.Item onClick={this.onItemClick.bind(this, index)}>
+								<Image src={icons[id]} />
+							</List.Item>
+							) :
+							<List.Item>
+								<Image src={placeholder} />
+							</List.Item>
+					}
+				</List>
+			</div>
 		);
 	}
 }
