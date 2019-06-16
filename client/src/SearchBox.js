@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {} from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import AwakeningBox from './AwakeningBox.js';
 //import './App.css';
 
@@ -25,11 +25,18 @@ class SearchBox extends Component {
 	render() {
 		return (
 			<div className="SearchBox">
-				<AwakeningBox
-					awakenings={this.state.awakenings}
-					addAwakening={this.addAwakening.bind(this)}
-					removeAwakening={this.removeAwakening.bind(this)}
-				/>
+				<Grid>
+					<Grid.Column mobile={16} tablet={9} computer={9}>
+						<AwakeningBox
+							awakenings={this.state.awakenings}
+							addAwakening={this.addAwakening.bind(this)}
+							removeAwakening={this.removeAwakening.bind(this)}
+						/>
+					</Grid.Column>
+					<Grid.Column mobile={16} tablet={7} computer={7}>
+						<Container>Search Results</Container>
+					</Grid.Column>
+				</Grid>
 			</div>
 		);
 	}

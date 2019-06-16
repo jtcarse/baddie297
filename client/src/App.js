@@ -18,18 +18,20 @@ class App extends Component {
 		return (
 			<div className="App">
 				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
+					{/* <img src={logo} className="App-logo" alt="logo" /> */}
 					{ message ? <p>{message}</p> : <p>Loading...</p> }
-					<a
+					{/*<a
 						className="App-link"
 						href="https://reactjs.org"
 						target="_blank"
 						rel="noopener noreferrer"
 					>
 						<Button>Learn React</Button>
-					</a>
+					</a>*/}
 				</header>
-				<SearchBox />
+				<div className="App-body">
+					<SearchBox />
+				</div>
 			</div>
 		);
 	}
