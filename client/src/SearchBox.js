@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { Button, Container, Grid } from 'semantic-ui-react';
 import AwakeningBox from './AwakeningBox.js';
+import ResultList from './ResultList.js';
 import axios from 'axios';
 //import './App.css';
 
 class SearchBox extends Component {
 	state = {
-		awakenings: []
+		awakenings: [],
+		results: []
 	};
 
 	addAwakening(a) {
@@ -31,7 +33,12 @@ class SearchBox extends Component {
 		}
 
 		axios.get(url)
-			.then(result => console.log(result.data));
+			.then(response => {
+				console.log(response.data);
+				this.setState({
+					results: response.data
+				});
+			});
 	}
 
 	render() {
@@ -44,10 +51,11 @@ class SearchBox extends Component {
 							addAwakening={this.addAwakening.bind(this)}
 							removeAwakening={this.removeAwakening.bind(this)}
 						/>
+						<br />
 						<Button onClick={this.search.bind(this)}>Search</Button>
 					</Grid.Column>
 					<Grid.Column mobile={16} tablet={7} computer={7}>
-						<Container>Search Results</Container>
+						<ResultList results={this.state.results} />
 					</Grid.Column>
 				</Grid>
 			</div>

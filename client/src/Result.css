@@ -1,0 +1,17 @@
+.Result {
+	background-color: #282c34;
+	padding: 4px;
+	border: 2px solid #b7bcc8;
+	border-radius: 2px;
+	text-align: left;
+}
+
+.ResultName {
+	color: white !important;
+}
+
+.ResultSegment {
+	background-color: #282c34 !important;
+	padding: 0 !important;
+	font-size: calc(8px + 2vmin) !important;
+}
