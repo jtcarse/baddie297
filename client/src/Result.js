@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { Grid, Image, List, Segment } from 'semantic-ui-react';
+import { Grid, Image, List, Loader, Segment } from 'semantic-ui-react';
 import icons from './awakeningIcons.js';
 import placeholder from './icons/awakenings/0.png';
 import monsterIcon from './icons/monsters/5217.png';
 import './Result.css';
 
 class Result extends Component {
-	render() {
+	state = {};
+
+	getAwakenings() {
 		let awakenings = [];
 		if (Object.keys(this.props.awakenings).length) {
 			Object.keys(this.props.awakenings).forEach(a => {
@@ -16,6 +18,31 @@ class Result extends Component {
 			});
 		}
 
+		this.setState({
+			awakenings: awakenings
+		});
+	}
+
+	getIcon() {
+		import(`./icons/monsters/${this.props.id}.png`)
+			.then(result => this.setState({
+				iconUrl: result.default
+			}));
+	}
+
+	componentDidMount() {
+		this.getIcon();
+		this.getAwakenings();
+	}
+
+	componentDidUpdate(oldProps) {
+		if (this.props.id !== oldProps.id) {
+			this.getIcon();
+			this.getAwakenings();
+		}
+	}
+
+	render() {
 		return (
 			<List.Item>
 				<div className="Result">
@@ -23,7 +50,11 @@ class Result extends Component {
 						<Grid.Row stretched>
 							<Grid.Column width={3}>
 								<Segment className="ResultSegment">
-									<Image src={monsterIcon} />
+									{
+										this.state.iconUrl ?
+										<Image src={this.state.iconUrl} /> :
+										<Loader active />
+									}
 								</Segment>
 							</Grid.Column>
 							<Grid.Column width={13}>
@@ -33,8 +64,8 @@ class Result extends Component {
 								<Segment className="ResultSegment">
 									<List horizontal>
 									{
-										awakenings.length ?
-										awakenings.map(id =>
+										this.state.awakenings ?
+										this.state.awakenings.map(id =>
 											<List.Item>
 												<Image src={icons[id]} />
 											</List.Item>

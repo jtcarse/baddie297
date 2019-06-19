@@ -8,22 +8,21 @@ import Result from './Result.js';
 class ResultList extends Component {
 	render() {
 		return (
-			<div className="ResultList">
-				<List>
-					{
-						this.props.results.length ?
-							this.props.results.map(result =>
-								<Result
-									name={result.name}
-									awakenings={result.awakenings}
-								/>
-							) :
-							<List.Item>
-								No results found.
-							</List.Item>
-					}
-				</List>
-			</div>
+			<List className="ResultList">
+				{
+					this.props.results.length ?
+						this.props.results.map(result =>
+							<Result
+								id={result._id}
+								name={result.name}
+								awakenings={result.awakenings}
+							/>
+						) :
+						<List.Item>
+							No results found.
+						</List.Item>
+				}
+			</List>
 		);
 	}
 }

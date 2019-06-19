@@ -1,0 +1,4 @@
+.ResultList {
+	height: 90vh !important;
+	overflow: scroll !important;
+}

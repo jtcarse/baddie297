@@ -12,6 +12,7 @@
 
 .ResultSegment {
 	background-color: #282c34 !important;
+	margin: 0 !important;
 	padding: 0 !important;
-	font-size: calc(8px + 2vmin) !important;
+	font-size: 20px !important;
 }

@@ -3,7 +3,7 @@ import { Button, Container, Grid } from 'semantic-ui-react';
 import AwakeningBox from './AwakeningBox.js';
 import ResultList from './ResultList.js';
 import axios from 'axios';
-//import './App.css';
+import './SearchBox.css';
 
 class SearchBox extends Component {
 	state = {
@@ -39,12 +39,13 @@ class SearchBox extends Component {
 					results: response.data
 				});
 			});
+
 	}
 
 	render() {
 		return (
 			<div className="SearchBox">
-				<Grid>
+				<Grid className="SearchGrid">
 					<Grid.Column mobile={16} tablet={9} computer={9}>
 						<AwakeningBox
 							awakenings={this.state.awakenings}
