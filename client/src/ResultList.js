@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Image, List } from 'semantic-ui-react';
-import icons from './awakeningIcons.js';
-import placeholder from './icons/awakenings/0.png';
+import { List } from 'semantic-ui-react';
 import Result from './Result.js';
 //import './AwakeningList.css';
 
@@ -15,6 +13,7 @@ class ResultList extends Component {
 							<Result
 								id={result._id}
 								name={result.name}
+								types={result.types}
 								awakenings={result.awakenings}
 							/>
 						) :

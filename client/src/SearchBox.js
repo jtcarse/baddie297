@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Container, Grid } from 'semantic-ui-react';
+import { Button, Grid } from 'semantic-ui-react';
 import AwakeningBox from './AwakeningBox.js';
 import TypeBox from './TypeBox.js';
 import ResultList from './ResultList.js';

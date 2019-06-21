@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
-import logo from './logo.svg';
+//import {} from 'semantic-ui-react';
+//import logo from './logo.svg';
 import './App.css';
 import SearchBox from './SearchBox.js';
 import axios from 'axios';

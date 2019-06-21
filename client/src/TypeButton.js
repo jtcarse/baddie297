@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Dimmer, Image } from 'semantic-ui-react';
+import { Button, Image } from 'semantic-ui-react';
 import './TypeButton.css';
 
 class TypeButton extends Component {

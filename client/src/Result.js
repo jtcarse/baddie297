@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Grid, Image, List, Loader, Segment } from 'semantic-ui-react';
 import icons from './awakeningIcons.js';
 import placeholder from './icons/awakenings/0.png';
-import monsterIcon from './icons/monsters/5217.png';
 import './Result.css';
 
 class Result extends Component {
