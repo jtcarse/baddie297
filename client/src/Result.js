@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import { Grid, Image, List, Loader, Segment } from 'semantic-ui-react';
-import icons from './awakeningIcons.js';
+import awakeningIcons from './awakeningIcons.js';
 import placeholder from './icons/awakenings/0.png';
+import typeIcons from './typeIcons.js';
 import './Result.css';
 
 class Result extends Component {
 	state = {};
+
+	getIcon() {
+		import(`./icons/monsters/${this.props.id}.png`)
+			.then(result => this.setState({
+				iconUrl: result.default
+			}));
+	}
 
 	getAwakenings() {
 		let awakenings = [];
@@ -22,22 +30,23 @@ class Result extends Component {
 		});
 	}
 
-	getIcon() {
-		import(`./icons/monsters/${this.props.id}.png`)
-			.then(result => this.setState({
-				iconUrl: result.default
-			}));
+	getTypes() {
+		this.setState({
+			types: this.props.types
+		});
 	}
 
 	componentDidMount() {
 		this.getIcon();
 		this.getAwakenings();
+		this.getTypes();
 	}
 
 	componentDidUpdate(oldProps) {
 		if (this.props.id !== oldProps.id) {
 			this.getIcon();
 			this.getAwakenings();
+			this.getTypes();
 		}
 	}
 
@@ -58,7 +67,18 @@ class Result extends Component {
 							</Grid.Column>
 							<Grid.Column width={13}>
 								<Segment className="ResultSegment">
-									<div className="ResultName">{this.props.name}</div>
+									<List horizontal>
+									{
+										this.state.types ?
+										this.state.types.map(t =>
+											<List.Item>
+												<Image src={typeIcons[t]} />
+											</List.Item>
+										) :
+										<List.Item><Image src={placeholder} /></List.Item>
+									}
+									<List.Item><div className="ResultName">{this.props.name}</div></List.Item>
+									</List>
 								</Segment>
 								<Segment className="ResultSegment">
 									<List horizontal>
@@ -66,7 +86,7 @@ class Result extends Component {
 										this.state.awakenings ?
 										this.state.awakenings.map(id =>
 											<List.Item>
-												<Image src={icons[id]} />
+												<Image src={awakeningIcons[id]} />
 											</List.Item>
 										) :
 										<List.Item><Image src={placeholder} /></List.Item>
