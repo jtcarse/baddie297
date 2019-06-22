@@ -1,0 +1,15 @@
+.ElementBox {
+	background-color: #282c34;
+	padding: 4px;
+	border: 2px solid #b7bcc8;
+	border-radius: 2px;
+}
+
+.ElementGrid {
+	margin: 0 !important;
+}
+
+.ElementColumn {
+	margin: 4px 0 !important;
+	padding: 0 !important;
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button, Grid } from 'semantic-ui-react';
 import AwakeningBox from './AwakeningBox.js';
 import TypeBox from './TypeBox.js';
+import ElementBox from './ElementBox.js';
 import ResultList from './ResultList.js';
 import axios from 'axios';
 import './SearchBox.css';
@@ -10,6 +11,7 @@ class SearchBox extends Component {
 	state = {
 		awakenings: [],
 		types: [],
+		elements: [],
 		results: []
 	};
 
@@ -41,6 +43,20 @@ class SearchBox extends Component {
 		});
 	}
 
+	toggleElement(e) {
+		let { elements } = this.state;
+
+		if (elements.includes(e)) {
+			elements = elements.filter(element => element !== e);
+		} else {
+			elements.push(e);
+		}
+
+		this.setState({
+			elements: elements
+		});
+	}
+
 	search() {
 		let url = 'http://localhost:8080/api/monsters?';
 		let queryArgs = [];
@@ -51,6 +67,10 @@ class SearchBox extends Component {
 
 		if (this.state.types.length) {
 			queryArgs.push('types=' + this.state.types.join());
+		}
+
+		if (this.state.elements.length) {
+			queryArgs.push('elements=' + this.state.elements.join());
 		}
 
 		url += queryArgs.join('&');
@@ -67,9 +87,9 @@ class SearchBox extends Component {
 	render() {
 		return (
 			<div className="SearchBox">
-				<Grid className="SearchGrid">
+				<Grid className="SearchGrid" verticalAlign='top'>
 					<Grid.Column mobile={16} tablet={9} computer={9}>
-						<Grid>
+						<Grid  verticalAlign='top'>
 							<Grid.Column width={5}>
 								<TypeBox
 									types={this.state.types}
@@ -77,7 +97,10 @@ class SearchBox extends Component {
 								/>
 							</Grid.Column>
 							<Grid.Column width={11}>
-								Elements
+								<ElementBox
+									elements={this.state.elements}
+									toggleElement={this.toggleElement.bind(this)}
+								/>
 							</Grid.Column>
 						</Grid>
 						<br />

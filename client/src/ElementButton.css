@@ -1,0 +1,8 @@
+.ElementButton {
+	padding: 0 !important;
+	margin: 0 !important;
+}
+
+.inactive {
+	opacity: 0.6 !important;
+}
