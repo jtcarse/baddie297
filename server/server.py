@@ -25,11 +25,20 @@ def monsters():
 
 	# insert types into query
 	if 'types' in args.keys():
-		query_args['types'] = { '$all': [ t for t in args['types'] ] }
-	
+		# check whether to 'and'/'or' types
+		if 'type_logic' in args.keys() and args['type_logic'][0] == 'or':
+			query_args['types'] = { '$in': [ t for t in args['types'] ] }
+		#default to 'and'
+		else:
+			query_args['types'] = { '$all': [ t for t in args['types'] ] }
+
 	# insert elements into query
 	if 'elements' in args.keys():
-		query_args['elements'] = { '$all': [ e for e in args['elements'] ] }
+		# check whether to 'and'/'or' elements
+		if 'element_logic' in args.keys() and args['element_logic'][0] == 'or':
+			query_args['elements'] = { '$in': [ e for e in args['elements'] ] }
+		else:
+			query_args['elements'] = { '$all': [ e for e in args['elements'] ] }
 
 	# insert awakenings into query
 	if 'awakenings' in args.keys():
@@ -38,7 +47,7 @@ def monsters():
 			a_dict[a] = a_dict.get(a, 0) + 1
 		for key, value in a_dict.items():
 			query_args['awakenings.{}'.format(key)] = { '$gte': value }
-	
+
 	# insert super awakenings into query
 	if 'super_awakenings' in args.keys():
 		sa_dict = {}
@@ -46,7 +55,7 @@ def monsters():
 			sa_dict[sa] = sa_dict.get(sa, 0) + 1
 		for key, value in sa_dict.items():
 			query_args['super_awakenings.{}'.format(key)] = { '$gte': value }
-	
+
 	if query_args:
 		query = { '$and': [ { key: value for key, value in query_args.items() } ] }
 	else:
