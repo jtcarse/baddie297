@@ -1,3 +1,13 @@
+.SearchBox {
+	align-self: flex-start !important;
+}
+
 .SearchGrid {
 	margin: 0 !important;
+}
+
+.SearchSegment {
+	background-color: #6f7a90 !important;
+	margin: 0 !important;
+	padding: 0 !important;
 }

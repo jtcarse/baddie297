@@ -57,7 +57,7 @@ class Result extends Component {
 					<Grid>
 						<Grid.Row stretched>
 							<Grid.Column width={3}>
-								<Segment className="ResultSegment">
+								<Segment basic className="ResultSegment">
 									{
 										this.state.iconUrl ?
 										<Image src={this.state.iconUrl} /> :
@@ -66,7 +66,7 @@ class Result extends Component {
 								</Segment>
 							</Grid.Column>
 							<Grid.Column width={13}>
-								<Segment className="ResultSegment">
+								<Segment basic className="ResultSegment">
 									<List horizontal>
 									{
 										this.state.types ?
@@ -80,7 +80,7 @@ class Result extends Component {
 									<List.Item><div className="ResultName">{this.props.name}</div></List.Item>
 									</List>
 								</Segment>
-								<Segment className="ResultSegment">
+								<Segment basic className="ResultSegment">
 									<List horizontal>
 									{
 										this.state.awakenings ?

@@ -10,10 +10,10 @@ class ElementButton extends Component {
 	render() {
 		return (
 			this.props.active ?
-			<Button className="ElementButton" onClick={this.onClick.bind(this)}>
+			<Button circular className="ElementButton" onClick={this.onClick.bind(this)}>
 				<Image src={this.props.icon} />
 			</Button> :
-			<Button className="ElementButton" onClick={this.onClick.bind(this)}>
+			<Button circular className="ElementButton" onClick={this.onClick.bind(this)}>
 				<Image className="inactive" src={this.props.icon} />
 			</Button>
 		);

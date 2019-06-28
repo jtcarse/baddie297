@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
-import { Button, Grid } from 'semantic-ui-react';
+import React, { Component, createRef } from 'react';
+import { Button, Grid, Ref, Segment, Sticky } from 'semantic-ui-react';
 import AwakeningBox from './AwakeningBox.js';
 import TypeBox from './TypeBox.js';
 import ElementBox from './ElementBox.js';
+import LogicBox from './LogicBox.js';
 import ResultList from './ResultList.js';
 import axios from 'axios';
 import './SearchBox.css';
@@ -11,9 +12,13 @@ class SearchBox extends Component {
 	state = {
 		awakenings: [],
 		types: [],
+		typeLogic: 'and',
 		elements: [],
+		elementLogic: 'and',
 		results: []
 	};
+
+	contextRef = createRef();
 
 	addAwakening(a) {
 		this.setState({
@@ -43,6 +48,36 @@ class SearchBox extends Component {
 		});
 	}
 
+	toggleTypeLogic() {
+		const { typeLogic } = this.state;
+		let newLogic;
+
+		if (typeLogic === 'and') {
+			newLogic = 'or';
+		} else {
+			newLogic = 'and';
+		}
+
+		this.setState({
+			typeLogic: newLogic
+		});
+	}
+
+	toggleElementLogic() {
+		const { elementLogic } = this.state;
+		let newLogic;
+
+		if (elementLogic === 'and') {
+			newLogic = 'or';
+		} else {
+			newLogic = 'and';
+		}
+
+		this.setState({
+			elementLogic: newLogic
+		});
+	}
+
 	toggleElement(e) {
 		let { elements } = this.state;
 
@@ -67,10 +102,12 @@ class SearchBox extends Component {
 
 		if (this.state.types.length) {
 			queryArgs.push('types=' + this.state.types.join());
+			queryArgs.push('type_logic=' + this.state.typeLogic);
 		}
 
 		if (this.state.elements.length) {
 			queryArgs.push('elements=' + this.state.elements.join());
+			queryArgs.push('element_logic=' + this.state.elementLogic);
 		}
 
 		url += queryArgs.join('&');
@@ -87,21 +124,36 @@ class SearchBox extends Component {
 	render() {
 		return (
 			<div className="SearchBox">
-				<Grid className="SearchGrid" verticalAlign='top'>
-					<Grid.Column mobile={16} tablet={9} computer={9}>
-						<Grid  verticalAlign='top'>
-							<Grid.Column width={5}>
-								<TypeBox
-									types={this.state.types}
-									toggleType={this.toggleType.bind(this)}
-								/>
-							</Grid.Column>
-							<Grid.Column width={11}>
-								<ElementBox
-									elements={this.state.elements}
-									toggleElement={this.toggleElement.bind(this)}
-								/>
-							</Grid.Column>
+				<Grid className="SearchGrid">
+					<Grid.Column mobile={16} tablet={8} computer={8}>
+						{/* START */}
+						<Grid>
+							<Grid.Row stretched>
+								<Grid.Column width={5}>
+									<Segment basic className="SearchSegment">
+										<TypeBox
+											types={this.state.types}
+											toggleType={this.toggleType.bind(this)}
+										/>
+									</Segment>
+								</Grid.Column>
+								<Grid.Column width={11}>
+									<Segment basic className="SearchSegment">
+										<ElementBox
+											elements={this.state.elements}
+											toggleElement={this.toggleElement.bind(this)}
+										/>
+									</Segment>
+									<Segment basic className="SearchSegment">
+										<LogicBox
+											typeLogic={this.state.typeLogic}
+											elementLogic={this.state.elementLogic}
+											toggleTypeLogic={this.toggleTypeLogic.bind(this)}
+											toggleElementLogic={this.toggleElementLogic.bind(this)}
+										/>
+									</Segment>
+								</Grid.Column>
+							</Grid.Row>
 						</Grid>
 						<br />
 						<AwakeningBox
@@ -111,8 +163,9 @@ class SearchBox extends Component {
 						/>
 						<br />
 						<Button onClick={this.search.bind(this)}>Search</Button>
+						{/* END */}
 					</Grid.Column>
-					<Grid.Column mobile={16} tablet={7} computer={7}>
+					<Grid.Column mobile={16} tablet={8} computer={8}>
 						<ResultList results={this.state.results} />
 					</Grid.Column>
 				</Grid>

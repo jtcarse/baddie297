@@ -1,16 +1,23 @@
-.ElementBox {
+.LogicBox {
 	background-color: #282c34;
 	padding: 4px;
 	border: 2px solid #b7bcc8;
 	border-radius: 2px;
 }
 
-.ElementGrid {
+.LogicGrid {
 	margin: 0 !important;
-    justify-content: center !important;
 }
 
-.ElementColumn {
+.LogicColumn {
 	margin: 4px 0 !important;
 	padding: 0 !important;
+}
+
+.LogicCheckbox {
+	color: white !important;
+}
+
+p {
+	margin-bottom: 2px !important;
 }
