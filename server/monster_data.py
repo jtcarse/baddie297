@@ -1,5 +1,9 @@
+import pymongo
 import requests
 from bs4 import BeautifulSoup
+
+def get_collection():
+	return pymongo.MongoClient('mongo', 27017).db.monsters
 
 def get_monster_data(monster_id):
 	url = 'http://puzzledragonx.com/en/monster.asp?n={}'.format(monster_id)
@@ -42,23 +46,65 @@ def get_monster_data(monster_id):
 	# get list of awoken skills
 	awakening_soup = soup.find_all('td', { 'class': 'awoken1' })
 	
-	if len(awakening_soup) > 0:
-		# if monster has awoken skills, store parsed ids
-		monster_data['awakenings'] = [
-			int(a['href'][18:]) for a in awakening_soup[0].find_all('a')
+	# no awakening data
+	if len(awakening_soup) == 0:
+		monster_data['awakenings'] = monster_data['super_awakenings'] = []
+
+	# only awakenings
+	elif len(awakening_soup) == 1:
+		awakening_list = [
+			int(a['href'][18:]) for a in awakening_soup[0].find_all('a') if a['href'][0] != 's'
 		]
-	else:
-		# otherwise, store an empty list
-		monster_data['awakenings'] = []
-	
-	if len(awakening_soup) > 1:
-		# if monster has super awoken skills, store parsed ids
-		monster_data['super_awakenings'] = [
-			int(a['href'][18:]) for a in awakening_soup[1].find_all('a')
-		]
-	else:
-		# otherwise, store an empty list
+		awakening_dict = {}
+		for a in awakening_list:
+			awakening_dict[str(a)] = awakening_dict.get(str(a), 0) + 1
+		monster_data['awakenings'] = awakening_dict
 		monster_data['super_awakenings'] = []
+	
+	# awakenings and super awakenings OR awakenings and jp awakenings
+	elif len(awakening_soup) == 2:
+		awakening_list = [
+			int(a['href'][18:]) for a in awakening_soup[0].find_all('a') if a['href'][0] != 's'
+		]
+		awakening_dict = {}
+		for a in awakening_list:
+			awakening_dict[str(a)] = awakening_dict.get(str(a), 0) + 1
+		monster_data['awakenings'] = awakening_dict
+		monster_data['super_awakenings'] = [
+			int(a['href'][24:]) for a in awakening_soup[1].find_all('a') if a['href'][0] == 's'
+		]
+
+	# awakenings and jp awakenings and super awakenings OR
+	# awakenings and super awakenings and jp super awakenings
+	elif len(awakening_soup) == 3:
+		awakening_list = [
+			int(a['href'][18:]) for a in awakening_soup[0].find_all('a') if a['href'][0] != 's'
+		]
+		awakening_dict = {}
+		for a in awakening_list:
+			awakening_dict[str(a)] = awakening_dict.get(str(a), 0) + 1
+		monster_data['awakenings'] = awakening_dict
+		super_awakening_list = [
+			int(a['href'][24:]) for a in awakening_soup[1].find_all('a') if a['href'][0] == 's'
+		]
+		if not super_awakening_list:
+			super_awakening_list = [
+				int(a['href'][24:]) for a in awakening_soup[2].find_all('a') if a['href'][0] == 's'
+			]
+		monster_data['super_awakenings'] = super_awakening_list
+	
+	# awakenings and jp awakenings and super awakenings and jp super awakenings
+	else:
+		awakening_list = [
+			int(a['href'][18:]) for a in awakening_soup[0].find_all('a') if a['href'][0] != 's'
+		]
+		awakening_dict = {}
+		for a in awakening_list:
+			awakening_dict[str(a)] = awakening_dict.get(str(a), 0) + 1
+		monster_data['awakenings'] = awakening_dict
+		monster_data['super_awakenings'] = [
+			int(a['href'][24:]) for a in awakening_soup[2].find_all('a') if a['href'][0] == 's'
+		]
 	
 	# check whether monster can be gotten by evolution
 	evolves_list = soup.find_all('td', { 'class': 'title', 'style': 'white-space: nowrap;' })
@@ -91,4 +137,49 @@ def get_monster_data(monster_id):
 		monster_data['evolves_from'] = monster_data['materials'] = []
 	
 	return monster_data
+
+def crawl(collection, start_id, stop_id):
+	failed = []
+	for i in range(start_id, stop_id + 1):
+		print('Monster #{}'.format(i))
+
+		print('\tGetting...')
+		try:
+			data = get_monster_data(i)
+		except Exception as e:
+			print('\tFailed to get data: {}'.format(e))
+			failed.append(i)
+			continue
+
+		print('\tInserting...')
+		try:
+			collection.insert_one(data)
+		except Exception as e:
+			print('\tFailed to insert data: {}'.format(e))
+			failed.append(i)
+			continue
+		print('\tSuccess!')
+	return failed
+
+def crawl_list(collection, ids):
+	failed = []
+	for n in ids:
+		print('Monster #{}'.format(n))
+		print('\tGetting...')
+		try:
+			data = get_monster_data(n)
+		except Exception as e:
+			print('\tFailed to get data: {}'.format(e))
+			failed.append(n)
+			continue
+
+		print('\tInserting...')
+		try:
+			collection.insert_one(data)
+		except Exception as e:
+			print('\tFailed to insert data: {}'.format(e))
+			failed.append(n)
+			continue
+		print('\tSuccess!')
+	return failed
 

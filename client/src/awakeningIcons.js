@@ -1,3 +1,5 @@
+import a1 from './icons/awakenings/1.png';
+import a2 from './icons/awakenings/2.png';
 import a3 from './icons/awakenings/3.png';
 import a4 from './icons/awakenings/4.png';
 import a5 from './icons/awakenings/5.png';
@@ -62,8 +64,11 @@ import a63 from './icons/awakenings/63.png';
 import a64 from './icons/awakenings/64.png';
 import a65 from './icons/awakenings/65.png';
 import a66 from './icons/awakenings/66.png';
+import a67 from './icons/awakenings/67.png';
 
 const awakeningIcons = {
+	1: a1,
+	2: a2,
 	3: a3,
 	4: a4,
 	5: a5,
@@ -127,7 +132,8 @@ const awakeningIcons = {
 	63: a63,
 	64: a64,
 	65: a65,
-	66: a66
+	66: a66,
+	67: a67
 };
 
 export default awakeningIcons;
