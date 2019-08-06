@@ -1,6 +1,6 @@
-# react-flask-mongo
-Assistant web app for PAD. Docker Compose React + Flask + MongoDB.
+# Baddie +297
+Assistant web app for PAD. Docker Compose + React + Flask + MongoDB.
 
-Run with `docker-compose up`.
+Build and run with `docker-compose build; docker-compose up`.
 
 Hosts app at `localhost:5000` and api at `localhost:8080`.
