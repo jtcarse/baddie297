@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import { Button, Grid, Ref, Segment, Sticky } from 'semantic-ui-react';
+import { Button, Grid, Segment } from 'semantic-ui-react';
 import AwakeningBox from './AwakeningBox.js';
 import TypeBox from './TypeBox.js';
 import ElementBox from './ElementBox.js';
