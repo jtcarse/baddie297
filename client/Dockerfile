@@ -1,3 +1,4 @@
+# stage 0: build react
 FROM node:10.15-alpine
 
 WORKDIR /client
@@ -6,11 +7,17 @@ COPY package.json ./
 
 RUN apk add yarn
 RUN yarn install
-RUN yarn global add serve
 
 COPY ./public ./public
 COPY ./src ./src
 
-EXPOSE 5000
+RUN yarn build && pwd && ls
 
-CMD yarn build && serve -s build
+# stage 1: serve with nginx
+FROM nginx:1.17-alpine
+
+COPY --from=0 /client/build /usr/share/nginx/html
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]
