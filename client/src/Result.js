@@ -60,7 +60,9 @@ class Result extends Component {
 								<Segment basic className="ResultSegment">
 									{
 										this.state.iconUrl ?
-										<Image src={this.state.iconUrl} /> :
+										<Image as='a'
+											src={this.state.iconUrl}
+											href={"http://www.puzzledragonx.com/en/monster.asp?n=" + this.props.id } /> :
 										<Loader active />
 									}
 								</Segment>
