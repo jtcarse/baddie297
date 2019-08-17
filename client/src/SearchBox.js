@@ -93,7 +93,7 @@ class SearchBox extends Component {
 	}
 
 	search() {
-		let url = 'http://localhost:8080/api/monsters?';
+		let url = 'api/monsters?';
 		let queryArgs = [];
 
 		if (this.state.awakenings.length) {
