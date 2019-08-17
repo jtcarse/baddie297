@@ -11,7 +11,7 @@ RUN yarn install
 COPY ./public ./public
 COPY ./src ./src
 
-RUN yarn build && pwd && ls
+RUN yarn build
 
 # stage 1: serve with nginx
 FROM nginx:1.17-alpine
