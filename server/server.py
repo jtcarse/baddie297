@@ -50,11 +50,7 @@ def monsters():
 
 	# insert super awakenings into query
 	if 'super_awakenings' in args.keys():
-		sa_dict = {}
-		for sa in args['awakenings']:
-			sa_dict[sa] = sa_dict.get(sa, 0) + 1
-		for key, value in sa_dict.items():
-			query_args['super_awakenings.{}'.format(key)] = { '$gte': value }
+		query_args['$or'] = [ { 'super_awakenings': int(s) } for s in args['super_awakenings'] ]
 
 	if query_args:
 		query = { '$and': [ { key: value for key, value in query_args.items() } ] }
