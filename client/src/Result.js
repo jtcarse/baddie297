@@ -30,6 +30,12 @@ class Result extends Component {
 		});
 	}
 
+	getSuperAwakenings() {
+		this.setState({
+			super_awakenings: this.props.super_awakenings
+		});
+	}
+
 	getTypes() {
 		this.setState({
 			types: this.props.types
@@ -39,6 +45,7 @@ class Result extends Component {
 	componentDidMount() {
 		this.getIcon();
 		this.getAwakenings();
+		this.getSuperAwakenings();
 		this.getTypes();
 	}
 
@@ -46,6 +53,7 @@ class Result extends Component {
 		if (this.props.id !== oldProps.id) {
 			this.getIcon();
 			this.getAwakenings();
+			this.getSuperAwakenings();
 			this.getTypes();
 		}
 	}
@@ -56,11 +64,12 @@ class Result extends Component {
 				<div className="Result">
 					<Grid>
 						<Grid.Row stretched>
-							<Grid.Column width={3}>
+							<Grid.Column className="IconColumn" width={3}>
 								<Segment basic className="ResultSegment">
 									{
 										this.state.iconUrl ?
 										<Image as="a"
+											className="MonsterIcon"
 											src={this.state.iconUrl}
 											target="_blank"
 											href={"http://www.puzzledragonx.com/en/monster.asp?n=" + this.props.id } /> :
@@ -74,13 +83,13 @@ class Result extends Component {
 									{
 										this.state.types ?
 										this.state.types.map(t =>
-											<List.Item>
-												<Image src={typeIcons[t]} />
+											<List.Item className="ResultItem">
+												<Image className="TypeIcon" src={typeIcons[t]} />
 											</List.Item>
 										) :
-										<List.Item><Image src={placeholder} /></List.Item>
+										<List.Item className="ResultItem"><Image src={placeholder} /></List.Item>
 									}
-									<List.Item><div className="ResultName">{this.props.name}</div></List.Item>
+									<List.Item className="ResultItem"><div className="ResultName">{this.props.name}</div></List.Item>
 									</List>
 								</Segment>
 								<Segment basic className="ResultSegment">
@@ -88,11 +97,24 @@ class Result extends Component {
 									{
 										this.state.awakenings ?
 										this.state.awakenings.map(id =>
-											<List.Item>
-												<Image src={awakeningIcons[id]} />
+											<List.Item className="ResultItem">
+												<Image className="AwakeningIcon" src={awakeningIcons[id]} />
 											</List.Item>
 										) :
-										<List.Item><Image src={placeholder} /></List.Item>
+										<List.Item className="ResultItem"><Image src={placeholder} /></List.Item>
+									}
+									</List>
+								</Segment>
+								<Segment basic className="ResultSegment">
+									<List horizontal>
+									{
+										this.state.super_awakenings ?
+										this.state.super_awakenings.map(id =>
+											<List.Item className="ResultItem">
+												<Image className="AwakeningIcon" src={awakeningIcons[id]} />
+											</List.Item>
+										) :
+										<List.Item className="ResultItem"><Image src={placeholder} /></List.Item>
 									}
 									</List>
 								</Segment>

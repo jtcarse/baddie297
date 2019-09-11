@@ -6,6 +6,10 @@
 	text-align: left;
 }
 
+.IconColumn {
+	/*padding: 0 !important;*/
+}
+
 .ResultName {
 	color: white !important;
 	font-size: 20px !important;
@@ -15,4 +19,22 @@
 	background-color: #282c34 !important;
 	margin: 0 !important;
 	padding: 0 !important;
+}
+
+.ResultItem {
+	padding: 0 !important;
+}
+
+.MonsterIcon {
+	/*height: 112px !important;
+	width: 112px !important;*/
+	padding: 4px 0 4px 4px !important;
+}
+
+.TypeIcon {
+	width: 24px !important;
+}
+
+.AwakeningIcon {
+	width: 24px !important;
 }

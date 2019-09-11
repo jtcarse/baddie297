@@ -15,6 +15,7 @@ class ResultList extends Component {
 								name={result.name}
 								types={result.types}
 								awakenings={result.awakenings}
+								super_awakenings={result.super_awakenings}
 							/>
 						) :
 						<List.Item>
