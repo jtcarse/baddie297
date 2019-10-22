@@ -183,3 +183,16 @@ def crawl_list(collection, ids):
 		print('\tSuccess!')
 	return failed
 
+def get_monster_icons(start_id, stop_id):
+    url = 'http://www.puzzledragonx.com/en/img/book/{}.png'
+    for i in range(start_id, stop_id + 1):
+        print('Monster #{}'.format(i))
+        print('\tGetting...')
+        r = requests.get(url.format(i))
+        if r.status_code == 200:
+            with open('../client/src/icons/monsters/{}.png'.format(i), 'wb') as f:
+                f.write(r.content)
+            print('\tSuccess!')
+        else:
+            print('\tFailure!')
+
