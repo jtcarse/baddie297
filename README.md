@@ -1,6 +1,6 @@
 # Baddie +297
-Assistant web app for PAD. Docker Compose + React + Flask + MongoDB.
+Awakening search engine for Puzzle and Dragons.
 
 Build and run with `docker-compose build; docker-compose up`.
 
-Hosts app at `localhost:5000` and api at `localhost:8080`.
+Serves app at port `80`.
