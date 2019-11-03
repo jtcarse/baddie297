@@ -3,21 +3,21 @@ import { Button, Image } from 'semantic-ui-react';
 import './ElementButton.css';
 
 class ElementButton extends Component {
-	onClick() {
-		this.props.onClick(this.props.element);
-	}
+    onClick() {
+        this.props.onClick(this.props.element);
+    }
 
-	render() {
-		return (
-			this.props.active ?
-			<Button circular className="ElementButton" onClick={this.onClick.bind(this)}>
-				<Image src={this.props.icon} />
-			</Button> :
-			<Button circular className="ElementButton" onClick={this.onClick.bind(this)}>
-				<Image className="inactive" src={this.props.icon} />
-			</Button>
-		);
-	}
+    render() {
+        return (
+            this.props.active ?
+            <Button circular className="ElementButton" onClick={this.onClick.bind(this)}>
+                <Image src={this.props.icon} />
+            </Button> :
+            <Button circular className="ElementButton" onClick={this.onClick.bind(this)}>
+                <Image className="inactive" src={this.props.icon} />
+            </Button>
+        );
+    }
 }
 
 export default ElementButton;
