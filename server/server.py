@@ -73,8 +73,8 @@ def monsters():
     results = [monster for monster in db.monsters.find(query, skip=page*PAGE_SIZE, limit=PAGE_SIZE)]
 
     return jsonify({
-        'current_page': page,
-        'total_pages': ceil(db.monsters.count(query)/25),
+        'currentPage': page,
+        'totalPages': ceil(db.monsters.count(query)/25),
         'data': results
     })
 
