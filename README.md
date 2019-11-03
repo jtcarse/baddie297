@@ -1,5 +1,5 @@
 # Baddie +297
-Awakening search engine for Puzzle and Dragons.
+Monster search engine for Puzzle and Dragons.
 
 Build and run with `docker-compose build; docker-compose up`.
 
