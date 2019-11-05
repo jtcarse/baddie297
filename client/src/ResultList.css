@@ -1,4 +1,11 @@
 .ResultList {
-	height: 100% !important;
-	overflow: auto !important;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #282c34;
+    border-radius: 5px;
+    background-color: #4b5362;
+    margin: 0 !important;
+    height: 77vh !important;
+    overflow-y: auto !important;
+    width: 100% !important;
 }

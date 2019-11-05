@@ -60,7 +60,7 @@ class Result extends Component {
 
     render() {
         return (
-            <List.Item>
+            <List.Item className="ResultListItem">
                 <div className="Result">
                     <Grid>
                         <Grid.Row stretched>

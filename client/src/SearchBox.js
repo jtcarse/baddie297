@@ -1,5 +1,5 @@
 import React, { Component, createRef } from 'react';
-import { Button, Grid, Segment } from 'semantic-ui-react';
+import { Button, Grid, Segment, Pagination } from 'semantic-ui-react';
 import axios from 'axios';
 
 import AwakeningBox from './AwakeningBox.js';
@@ -7,7 +7,7 @@ import TypeBox from './TypeBox.js';
 import ElementBox from './ElementBox.js';
 import LogicBox from './LogicBox.js';
 import ResultList from './ResultList.js';
-import PageList from './PageList.js';
+//import PageList from './PageList.js';
 
 import './SearchBox.css';
 
@@ -19,7 +19,7 @@ class SearchBox extends Component {
         elements: [],
         elementLogic: 'and',
         results: [],
-        currentPage: 0,
+        activePage: 0,
         totalPages: 0
     };
 
@@ -97,9 +97,13 @@ class SearchBox extends Component {
         });
     }
 
+    handlePageChange(e, { activePage }) {
+        this.setPage(activePage);
+    }
+
     setPage(page) {
         this.setState(
-            { currentPage: page },
+            { activePage: page },
             () => this.search()
         );
     }
@@ -122,7 +126,8 @@ class SearchBox extends Component {
             queryArgs.push('element_logic=' + this.state.elementLogic);
         }
 
-        queryArgs.push('page=' + this.state.currentPage);
+        // decrement activePage to obtain 0 indexing for back-end interaction
+        queryArgs.push('page=' + (this.state.activePage - 1));
 
         url += queryArgs.join('&');
 
@@ -177,15 +182,19 @@ class SearchBox extends Component {
                             removeAwakening={this.removeAwakening.bind(this)}
                         />
                         <br />
-                        <Button onClick={this.setPage.bind(this, 0)}>Search</Button>
+                        <Button onClick={() => this.setPage(1)}>Search</Button>
                     </Grid.Column>
                     <Grid.Column mobile={16} tablet={8} computer={8}>
                         <ResultList results={this.state.results} />
-                        <PageList
-                            onItemClick={this.setPage.bind(this)}
-                            currentPage={this.state.currentPage}
-                            totalPages={this.state.totalPages}
-                        />
+                        {
+                            this.state.totalPages ?
+                                <Pagination secondary pointing
+                                    onPageChange={this.handlePageChange.bind(this)}
+                                    activePage={this.state.activePage}
+                                    totalPages={this.state.totalPages}
+                                />
+                            : null
+                        }
                     </Grid.Column>
                 </Grid>
             </div>

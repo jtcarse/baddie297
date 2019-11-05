@@ -1,6 +1,6 @@
 .Result {
 	background-color: #282c34;
-	padding: 4px;
+	padding: 2px;
 	border: 2px solid #b7bcc8;
 	border-radius: 2px;
 	text-align: left;
@@ -37,4 +37,9 @@
 
 .AwakeningIcon {
 	width: 24px !important;
+}
+
+.ResultListItem {
+    padding: 0 0 5px 0 !important;
+    margin: 10px 10px 5px 10px;
 }

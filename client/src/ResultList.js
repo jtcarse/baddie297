@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { List } from 'semantic-ui-react';
 
 import Result from './Result.js';
-//import './AwakeningList.css';
+import './ResultList.css';
 
 class ResultList extends Component {
     setPage(page) {

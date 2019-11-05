@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import { List, Button } from 'semantic-ui-react';
+import { Pagination } from 'semantic-ui-react';
 
 class PageList extends Component {
-    onItemClick(page) {
-        this.props.onItemClick(page);
+    onPageChange(e, { page }) {
+        this.props.onPageChange(page);
     }
 
     render() {
         return (
-            <List horizontal>
-            {
+            <Pagination
+                activePage={this.props.currentPage}
+                totalPages={this.props.totalPages}
+                onPageChange={this.onPageChange}
+            />
+            {/*
                 [...Array(this.props.totalPages).keys()].map((page, index) =>
                     <List.Item onClick={this.onItemClick.bind(this, page)}>
                         {page}
                     </List.Item>
                 )
-            }
-            </List>
+            */}
         );
     }
 }
