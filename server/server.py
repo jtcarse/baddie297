@@ -5,6 +5,33 @@ from pymongo import MongoClient
 from flask import Flask, jsonify, request
 from flask_cors import cross_origin
 
+def expand_awakenings(a_dict):
+    """
+    Expand awakenings into a query which includes all permutations of awakenings + super awakenings.
+
+    Required Args
+        a_dict (dict) - a frequency dictionary of awakenings
+
+    Returns
+        (dict) - a query that will match all permutations of awakenings + super awakenings
+    """
+
+    query = {'$or': []}
+    query.get('$or').append(
+        {'$and': [{'awakenings.{}'.format(key): {'$gte': value}} for key, value in a_dict.items()]}
+    )
+    for a in a_dict:
+        sub_query = []
+        for key, value in a_dict.items():
+            if key == a:
+                if value > 1:
+                    sub_query.append({'awakenings.{}'.format(key): {'$gte': value - 1}})
+            else:
+                sub_query.append({'awakenings.{}'.format(key): {'$gte': value}})
+        sub_query.append({'super_awakenings': int(a)})
+        query.get('$or').append({'$and': sub_query})
+    return query
+
 app = Flask(__name__)
 client = MongoClient('mongo', 27017)
 db = client.db
@@ -27,43 +54,43 @@ def monsters():
     # split up lists within queries
     args = {key: value.split(',') for key, value in request.args.items()}
 
-    # valid parameters: name, skill, awakenings, super_awakenings, page
+    # valid parameters: awakenings, types, elements, type and/or, element and/or, include_super_awakenings, page
     query_args = {}
 
     # get page number; default to 0
     if 'page' in args:
-        page = int(args['page'][0])
+        page = int(args.get('page')[0])
     else:
         page = 0
 
     # insert types into query
     if 'types' in args:
         # check whether to 'and'/'or' types
-        if 'type_logic' in args and args['type_logic'][0] == 'or':
-            query_args['types'] = {'$in': [t for t in args['types']]}
+        if 'type_logic' in args and args.get('type_logic')[0] == 'or':
+            query_args['types'] = {'$in': [t for t in args.get('types')]}
         #default to 'and'
         else:
-            query_args['types'] = {'$all': [t for t in args['types']]}
+            query_args['types'] = {'$all': [t for t in args.get('types')]}
 
     # insert elements into query
     if 'elements' in args:
         # check whether to 'and'/'or' elements
-        if 'element_logic' in args and args['element_logic'][0] == 'or':
-            query_args['elements'] = {'$in': [e for e in args['elements']]}
+        if 'element_logic' in args and args.get('element_logic')[0] == 'or':
+            query_args['elements'] = {'$in': [e for e in args.get('elements')]}
         else:
-            query_args['elements'] = {'$all': [e for e in args['elements']]}
+            query_args['elements'] = {'$all': [e for e in args.get('elements')]}
 
     # insert awakenings into query
     if 'awakenings' in args:
         a_dict = {}
-        for a in args['awakenings']:
+        for a in args.get('awakenings'):
             a_dict[a] = a_dict.get(a, 0) + 1
-        for key, value in a_dict.items():
-            query_args['awakenings.{}'.format(key)] = {'$gte': value}
 
-    # insert super awakenings into query
-    if 'super_awakenings' in args:
-        query_args['$or'] = [{'super_awakenings': int(s)} for s in args['super_awakenings']]
+        if 'include_super_awakenings' in args and args.get('include_super_awakenings')[0] == 'false':
+            for key, value in a_dict.items():
+                query_args['awakenings.{}'.format(key)] = {'$gte': value}
+        else:
+            query_args['$or'] = expand_awakenings(a_dict).get('$or')
 
     if query_args:
         query = {'$and': [{key: value for key, value in query_args.items()}]}
