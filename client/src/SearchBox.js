@@ -18,6 +18,7 @@ class SearchBox extends Component {
         typeLogic: 'and',
         elements: [],
         elementLogic: 'and',
+        includeSuperAwakenings: true,
         results: [],
         activePage: 0,
         totalPages: 0
@@ -97,6 +98,13 @@ class SearchBox extends Component {
         });
     }
 
+    toggleIncludeSuperAwakenings() {
+        const { includeSuperAwakenings } = this.state;
+        this.setState({
+            includeSuperAwakenings: !includeSuperAwakenings
+        });
+    }
+
     handlePageChange(e, { activePage }) {
         this.setPage(activePage);
     }
@@ -114,6 +122,7 @@ class SearchBox extends Component {
 
         if (this.state.awakenings.length) {
             queryArgs.push('awakenings=' + this.state.awakenings.join());
+            queryArgs.push('include_super_awakenings=' + `${this.state.includeSuperAwakenings}`);
         }
 
         if (this.state.types.length) {
@@ -170,6 +179,8 @@ class SearchBox extends Component {
                                             elementLogic={this.state.elementLogic}
                                             toggleTypeLogic={this.toggleTypeLogic.bind(this)}
                                             toggleElementLogic={this.toggleElementLogic.bind(this)}
+                                            includeSuperAwakenings={this.state.includeSuperAwakenings}
+                                            toggleIncludeSuperAwakenings={this.toggleIncludeSuperAwakenings.bind(this)}
                                         />
                                     </Segment>
                                 </Grid.Column>

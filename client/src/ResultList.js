@@ -25,6 +25,7 @@ class ResultList extends Component {
                         />
                     ) :
                     <List.Item>
+                        <br />
                         No results found.
                     </List.Item>
             }

@@ -11,11 +11,15 @@ class LogicBox extends Component {
         this.props.toggleElementLogic();
     }
 
+    toggleIncludeSuperAwakenings() {
+        this.props.toggleIncludeSuperAwakenings();
+    }
+
     render() {
         return (
             <div className="LogicBox">
                 <Grid className="LogicGrid">
-                    <Grid.Column className="LogicColumn" width={8}>
+                    <Grid.Column className="LogicColumn" width={5}>
                         <p>Types</p>
                         <Checkbox toggle
                             className="LogicCheckbox"
@@ -23,12 +27,20 @@ class LogicBox extends Component {
                             onChange={this.toggleTypeLogic.bind(this)}
                         />
                     </Grid.Column>
-                    <Grid.Column className="LogicColumn" width={8}>
+                    <Grid.Column className="LogicColumn" width={5}>
                         <p>Elements</p>
                         <Checkbox toggle
                             className="LogicCheckbox"
                             label=<Label>{this.props.elementLogic.toUpperCase()}</Label>
                             onChange={this.toggleElementLogic.bind(this)}
+                        />
+                    </Grid.Column>
+                    <Grid.Column className="LogicColumn" width={6}>
+                        <p>Include SAs</p>
+                        <Checkbox toggle
+                            className="LogicCheckbox"
+                            label=<Label>{`${this.props.includeSuperAwakenings}`.toUpperCase()}</Label>
+                            onChange={this.toggleIncludeSuperAwakenings.bind(this)}
                         />
                     </Grid.Column>
                 </Grid>
