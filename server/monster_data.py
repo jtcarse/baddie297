@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 def get_collection():
-	return pymongo.MongoClient('mongo', 27017).db.monsters
+	return pymongo.MongoClient('db', 27017).db.monsters
 
 def get_monster_data(monster_id):
 	url = 'http://puzzledragonx.com/en/monster.asp?n={}'.format(monster_id)
