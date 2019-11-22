@@ -1,20 +1,20 @@
 version: "2"
 
 services:
-  mongo:
+  db:
     image: mongo:4.0-xenial
     volumes:
       - data:/data/db
-  flask:
+  server:
     build: ./server
     depends_on:
-      - mongo
-  nginx:
+      - db
+  client:
     build: ./client
     ports:
       - "80:80"
     depends_on:
-      - flask
+      - server
 
 volumes:
   data:
