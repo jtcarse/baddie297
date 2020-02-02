@@ -27,7 +27,7 @@
 
 .App-body {
   background-color: #6f7a90;
-  height: 85vh;
+  min-height: 85vh;
   padding: 0;
   display: flex;
   flex-direction: row;
