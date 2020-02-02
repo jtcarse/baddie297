@@ -33,7 +33,7 @@ def expand_awakenings(a_dict):
     return query
 
 app = Flask(__name__)
-client = MongoClient('mongo', 27017)
+client = MongoClient('db', 27017)
 db = client.db
 
 @app.route('/', methods=['GET'])
