@@ -9,19 +9,41 @@
 .IconColumn {
 }
 
-.ResultName {
-    color: white;
-    font-size: calc(1vh + .5vw);
+.NameItem {
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-.ResultSegment {
+.ResultName {
+    color: white;
+    font-size: calc(.5vw + 1vh);
+}
+
+.LeftSegment {
     background-color: #282c34 !important;
-    margin: 0 !important;
+    margin: auto !important;
+    padding: 0 !important;
+}
+
+.RightSegment {
+    background-color: #282c34 !important;
+    margin: 0 auto 0 0 !important;
     padding: 0 !important;
 }
 
 .ResultItem {
+    margin: auto !important;
     padding: 0 !important;
+}
+
+.TypeItem {
+    margin: auto !important;
+    padding: 0 !important;
+}
+
+.AwakeningItem {
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .MonsterIcon {
@@ -33,11 +55,13 @@
 }
 
 .TypeIcon {
-    width: calc(1vh + 1vw);
+    width: calc(.75vw + 1.5vh);
+    margin: calc(.25vw + .25vh) !important;
 }
 
 .AwakeningIcon {
-    width: calc(1vh + 1vw);
+    width: calc(.75vw + 1.5vh);
+    margin: calc(.25vw + .25vh) !important;
 }
 
 .ResultListItem {
