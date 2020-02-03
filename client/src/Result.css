@@ -1,45 +1,43 @@
 .Result {
-	background-color: #282c34;
-	padding: 2px;
-	border: 2px solid #b7bcc8;
-	border-radius: 2px;
-	text-align: left;
+    background-color: #282c34;
+    padding: 2px;
+    border: 2px solid #b7bcc8;
+    border-radius: 2px;
+    text-align: left;
 }
 
 .IconColumn {
-	/*padding: 0 !important;*/
 }
 
 .ResultName {
-	color: white !important;
-	font-size: 20px !important;
+    color: white;
+    font-size: calc(1vh + .5vw);
 }
 
 .ResultSegment {
-	background-color: #282c34 !important;
-	margin: 0 !important;
-	padding: 0 !important;
+    background-color: #282c34 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
 .ResultItem {
-	padding: 0 !important;
+    padding: 0 !important;
 }
 
 .MonsterIcon {
-	/*height: 112px !important;
-	width: 112px !important;*/
-        margin-top: 5%;
-        margin-bottom: 5%;
-        margin-left: 5%;
-	padding: 4px 0 4px 4px !important;
+    margin: auto;
+}
+
+.TypeList {
+    margin: auto;
 }
 
 .TypeIcon {
-	width: 24px !important;
+    width: calc(1vh + 1vw);
 }
 
 .AwakeningIcon {
-	width: 24px !important;
+    width: calc(1vh + 1vw);
 }
 
 .ResultListItem {
