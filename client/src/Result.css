@@ -1,45 +1,67 @@
 .Result {
-	background-color: #282c34;
-	padding: 2px;
-	border: 2px solid #b7bcc8;
-	border-radius: 2px;
-	text-align: left;
+    background-color: #282c34;
+    padding: 2px;
+    border: 2px solid #b7bcc8;
+    border-radius: 2px;
+    text-align: left;
 }
 
 .IconColumn {
-	/*padding: 0 !important;*/
+}
+
+.NameItem {
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .ResultName {
-	color: white !important;
-	font-size: 20px !important;
+    color: white;
+    font-size: calc(.5vw + 1vh);
 }
 
-.ResultSegment {
-	background-color: #282c34 !important;
-	margin: 0 !important;
-	padding: 0 !important;
+.LeftSegment {
+    background-color: #282c34 !important;
+    margin: auto !important;
+    padding: 0 !important;
+}
+
+.RightSegment {
+    background-color: #282c34 !important;
+    margin: 0 auto 0 0 !important;
+    padding: 0 !important;
 }
 
 .ResultItem {
-	padding: 0 !important;
+    margin: auto !important;
+    padding: 0 !important;
+}
+
+.TypeItem {
+    margin: auto !important;
+    padding: 0 !important;
+}
+
+.AwakeningItem {
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
 .MonsterIcon {
-	/*height: 112px !important;
-	width: 112px !important;*/
-        margin-top: 5%;
-        margin-bottom: 5%;
-        margin-left: 5%;
-	padding: 4px 0 4px 4px !important;
+    margin: auto;
+}
+
+.TypeList {
+    margin: auto;
 }
 
 .TypeIcon {
-	width: 24px !important;
+    width: calc(.75vw + 1.5vh);
+    margin: calc(.25vw + .25vh) !important;
 }
 
 .AwakeningIcon {
-	width: 24px !important;
+    width: calc(.75vw + 1.5vh);
+    margin: calc(.25vw + .25vh) !important;
 }
 
 .ResultListItem {

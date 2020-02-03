@@ -64,57 +64,61 @@ class Result extends Component {
                 <div className="Result">
                     <Grid>
                         <Grid.Row stretched>
-                            <Grid.Column className="IconColumn" width={3}>
-                                <Segment basic className="ResultSegment">
+                            <Grid.Column className="IconColumn" width={4}>
+                                <Segment basic className="LeftSegment">
                                     {
                                         this.state.iconUrl ?
                                         <Image as="a"
                                             className="MonsterIcon"
                                             src={this.state.iconUrl}
                                             target="_blank"
-                                            href={"http://www.puzzledragonx.com/en/monster.asp?n=" + this.props.id } /> :
-                                        <Loader active />
+                                            href={"http://www.puzzledragonx.com/en/monster.asp?n=" + this.props.id}/> :
+                                        <Loader active/>
                                     }
                                 </Segment>
-                            </Grid.Column>
-                            <Grid.Column width={13}>
-                                <Segment basic className="ResultSegment">
-                                    <List horizontal>
+                                <Segment basic className="LeftSegment">
+                                    <List horizontal className="TypeList">
                                     {
                                         this.state.types ?
                                         this.state.types.map(t =>
-                                            <List.Item className="ResultItem">
-                                                <Image className="TypeIcon" src={typeIcons[t]} />
+                                            <List.Item className="TypeItem">
+                                                <Image className="TypeIcon" src={typeIcons[t]}/>
                                             </List.Item>
                                         ) :
-                                        <List.Item className="ResultItem"><Image src={placeholder} /></List.Item>
+                                        <List.Item className="TypeItem"><Image src={placeholder}/></List.Item>
                                     }
-                                    <List.Item className="ResultItem"><div className="ResultName">{this.props.name}</div></List.Item>
                                     </List>
                                 </Segment>
-                                <Segment basic className="ResultSegment">
+                            </Grid.Column>
+                            <Grid.Column width={12}>
+                                <Segment basic className="RightSegment">
+                                    <div className="NameItem">
+                                        <div verticalAlign="middle" className="ResultName">{this.props.name}</div>
+                                    </div>
+                                </Segment>
+                                <Segment basic className="RightSegment">
                                     <List horizontal>
                                     {
                                         this.state.awakenings ?
                                         this.state.awakenings.map(id =>
-                                            <List.Item className="ResultItem">
-                                                <Image className="AwakeningIcon" src={awakeningIcons[id]} />
+                                            <List.Item className="AwakeningItem">
+                                                <Image className="AwakeningIcon" src={awakeningIcons[id]}/>
                                             </List.Item>
                                         ) :
-                                        <List.Item className="ResultItem"><Image src={placeholder} /></List.Item>
+                                        <List.Item className="ResultItem"><Image src={placeholder}/></List.Item>
                                     }
                                     </List>
                                 </Segment>
-                                <Segment basic className="ResultSegment">
+                                <Segment basic className="RightSegment">
                                     <List horizontal>
                                     {
                                         this.state.super_awakenings ?
                                         this.state.super_awakenings.map(id =>
                                             <List.Item className="ResultItem">
-                                                <Image className="AwakeningIcon" src={awakeningIcons[id]} />
+                                                <Image className="AwakeningIcon" src={awakeningIcons[id]}/>
                                             </List.Item>
                                         ) :
-                                        <List.Item className="ResultItem"><Image src={placeholder} /></List.Item>
+                                        <List.Item className="ResultItem"><Image src={placeholder}/></List.Item>
                                     }
                                     </List>
                                 </Segment>
