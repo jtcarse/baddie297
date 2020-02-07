@@ -19,7 +19,7 @@ class AwakeningBox extends Component {
             <div className="AwakeningBox">
                 <Grid className="AwakeningGrid">
                     { Object.keys(icons).map(id =>
-                        <Grid.Column width={1} className="AwakeningColumn">
+                        <Grid.Column mobile={2} tablet={2} computer={1} className="AwakeningColumn">
                             <AwakeningButton
                                 id={id}
                                 icon={icons[id]}

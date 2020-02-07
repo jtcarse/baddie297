@@ -122,7 +122,7 @@ class SearchBox extends Component {
 
         if (this.state.awakenings.length) {
             queryArgs.push('awakenings=' + this.state.awakenings.join());
-            queryArgs.push('include_super_awakenings=' + `${this.state.includeSuperAwakenings}`);
+            queryArgs.push(`include_super_awakenings=${this.state.includeSuperAwakenings}`);
         }
 
         if (this.state.types.length) {
@@ -203,6 +203,10 @@ class SearchBox extends Component {
                                     onPageChange={this.handlePageChange.bind(this)}
                                     activePage={this.state.activePage}
                                     totalPages={this.state.totalPages}
+                                    boundaryRange={0}
+                                    siblingRange={1}
+                                    prevItem={null}
+                                    nextItem={null}
                                 />
                             : null
                         }

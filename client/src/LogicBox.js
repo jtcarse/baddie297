@@ -36,7 +36,7 @@ class LogicBox extends Component {
                         />
                     </Grid.Column>
                     <Grid.Column className="LogicColumn" width={6}>
-                        <p>Include SAs</p>
+                        <p>Include SA</p>
                         <Checkbox toggle
                             className="LogicCheckbox"
                             label=<Label>{`${this.props.includeSuperAwakenings}`.toUpperCase()}</Label>
