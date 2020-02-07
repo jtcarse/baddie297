@@ -2,12 +2,12 @@ FROM python:3.6-alpine
 
 WORKDIR /server
 
-COPY requirements.txt ./
+COPY requirements.txt .
 
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY server.py ./
-COPY monster_data.py ./
+COPY server.py .
+COPY monster_data.py .
 
 EXPOSE 8080
 

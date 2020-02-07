@@ -6,11 +6,11 @@ services:
     volumes:
       - data:/data/db
   server:
-    build: ./server
+    build: server
     depends_on:
       - db
   client:
-    build: ./client
+    build: client
     ports:
       - "80:80"
     depends_on:

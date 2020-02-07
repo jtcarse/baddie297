@@ -3,13 +3,13 @@ FROM node:10.15-alpine
 
 WORKDIR /client
 
-COPY package.json ./
+COPY package.json .
 
 RUN apk add yarn
 RUN yarn install
 
-COPY ./public ./public
-COPY ./src ./src
+COPY public public
+COPY src src
 
 RUN yarn build
 
@@ -17,7 +17,7 @@ RUN yarn build
 FROM nginx:1.17-alpine
 
 COPY --from=0 /client/build /usr/share/nginx/html
-COPY ./default.conf /etc/nginx/conf.d/default.conf
+COPY default.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
 
