@@ -5,8 +5,7 @@ WORKDIR /client
 
 COPY package.json .
 
-RUN apk add yarn
-RUN yarn install
+RUN apk add yarn && yarn install
 
 COPY public public
 COPY src src

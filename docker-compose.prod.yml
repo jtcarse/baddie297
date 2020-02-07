@@ -10,7 +10,9 @@ services:
     depends_on:
       - db
   client:
-    build: client
+    build:
+      context: client
+      dockerfile: Dockerfile-prod
     ports:
       - "80:80"
     depends_on:

@@ -1,0 +1,15 @@
+# stage 0: build react
+FROM node:10.15-alpine
+
+WORKDIR /client
+
+COPY package.json .
+
+RUN apk add yarn && yarn install
+
+COPY public public
+COPY src src
+
+EXPOSE 80
+
+CMD ["yarn", "start"]
