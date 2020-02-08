@@ -162,7 +162,8 @@ def crawl(collection, start_id, stop_id):
 	return failed
 
 def crawl_to(collection, stop_id):
-    [old_max_id] = collection.find().sort([('_id', pymongo.DESCENDING)]).limit(1)
+    [result] = collection.find().sort([('_id', pymongo.DESCENDING)]).limit(1)
+    old_max_id = result['_id']
     crawl(collection, old_max_id + 1, stop_id)
     return old_max_id
 
