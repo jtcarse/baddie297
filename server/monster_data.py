@@ -161,6 +161,11 @@ def crawl(collection, start_id, stop_id):
 		print('\tSuccess!')
 	return failed
 
+def crawl_to(collection, stop_id):
+    [old_max_id] = collection.find().sort([('_id', pymongo.DESCENDING)]).limit(1)
+    crawl(collection, old_max_id + 1, stop_id)
+    return old_max_id
+
 def crawl_list(collection, ids):
 	failed = []
 	for n in ids:
